@@ -1,0 +1,10 @@
+// app/(auth)/forgot_pass.tsx
+import { Text, View } from "react-native";
+
+export default function ForgotPassword() {
+  return (
+    <View>
+      <Text>Forgot Password Screen</Text>
+    </View>
+  );
+}
