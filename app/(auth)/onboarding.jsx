@@ -11,7 +11,6 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-
 const { width, height } = Dimensions.get("window");
 const RADIUS = 140;
 const CENTER_X = width / 2;
@@ -27,7 +26,7 @@ const cars = [
 ];
 
 export default function AnimatedCarsCircle() {
-  const router= useRouter();
+  const router = useRouter();
   const rotation = useSharedValue(0);
 
   useEffect(() => {
@@ -42,27 +41,30 @@ export default function AnimatedCarsCircle() {
   }, []);
 
   return (
-    
-    
     <LinearGradient
       colors={["#0f0c29", "#302b63", "#24243e"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }} 
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
-      <StatusBar style="light"/>
-      
+      <StatusBar style="light" />
+
       <View style={styles.header}>
-        <Text style={{position: "absolute",
-              top: 20,
-              alignSelf: "center",
-              color: "white",
-              fontSize: 36,
-              fontFamily:"Lato-Bold",
-              // fontWeight: "bold",
-              zIndex: 10}}>carsX
-          </Text>
+        <Text
+          style={{
+            position: "absolute",
+            top: 20,
+            alignSelf: "center",
+            color: "white",
+            fontSize: 36,
+            fontFamily: "Lato-Bold",
+            zIndex: 10,
+          }}
+        >
+          carsX
+        </Text>
       </View>
+
       {/* Rotating cars */}
       {cars.map((car, i) => {
         const AnimatedCar = () => {
@@ -73,9 +75,7 @@ export default function AnimatedCarsCircle() {
 
             const minSize = 50;
             const maxSize = 90;
-            const scale =
-              minSize +
-              (maxSize - minSize) * ((Math.sin(angle) + 1) / 2);
+            const scale = minSize + (maxSize - minSize) * ((Math.sin(angle) + 1) / 2);
 
             return {
               position: "absolute",
@@ -92,24 +92,15 @@ export default function AnimatedCarsCircle() {
             };
           });
 
-          return (
-            <Animated.Image
-              source={car}
-              style={[styles.car, animatedStyle]}
-              resizeMode="cover"
-            />
-          );
+          return <Animated.Image source={car} style={[styles.car, animatedStyle]} resizeMode="cover" />;
         };
 
         return <AnimatedCar key={i} />;
       })}
-      
+
       {/* Center Car */}
       <View style={styles.centerWrapper}>
-        <LinearGradient
-          colors={["#ff8c00", "#ff0080"]}
-          style={styles.centerGlow}
-        >
+        <LinearGradient colors={["#ff8c00", "#ff0080"]} style={styles.centerGlow}>
           <Image
             source={require("../../assets/images/onboardimg/mustang.jpeg")}
             style={styles.centerCar}
@@ -118,17 +109,28 @@ export default function AnimatedCarsCircle() {
         </LinearGradient>
       </View>
 
-      {/* Title and Button */}
+      {/* Title and Buttons */}
       <View style={styles.bottomSection}>
         <Text style={styles.title}>Inspired Cars</Text>
-        <Text style={styles.subtitle}>
-          Experience the power and style that drives innovation.
-        </Text>
+        <Text style={styles.subtitle}>Experience the power and style that drives innovation.</Text>
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.button}
-          onPress={() => router.push('/login')}>
-          <Text style={styles.buttonText}>Journey Begins!!</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={[styles.button, { backgroundColor: "#ff0066" }]}
+            onPress={() => router.push("/login")}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={[styles.button, { backgroundColor: "#ff8c00" }]}
+            onPress={() => router.push("/signup")}
+          >
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </LinearGradient>
   );
@@ -145,16 +147,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     zIndex: 10,
   },
-  // title:{
-  //   fontSize: 42,
-  //   fontWeight: "800",
-  //   color: "#fff",
-  //   letterSpacing: 2,
-  //   textTransform: "uppercase",
-  //   textShadowColor: "rgba(255, 0, 102, 0.8)",
-  //   textShadowOffset: { width: 2, height: 2 },
-  //   textShadowRadius: 10,
-  // },
   car: {
     position: "absolute",
   },
@@ -202,10 +194,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 30,
   },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 20,
+  },
   button: {
-    backgroundColor: "#ff0066",
     paddingVertical: 14,
-    paddingHorizontal: 50,
+    paddingHorizontal: 40,
     borderRadius: 30,
     shadowColor: "#ff0066",
     shadowOpacity: 0.4,
