@@ -114,9 +114,11 @@
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { signAccessToken, signRefreshToken } from "../../utils/generateToken.js";
 import admin from "../config/firebaseAdmin.js";
 import User from "../models/userModel.js";
-import { signAccessToken, signRefreshToken } from "../utils/generateToken.js";
+
+
 
 /**
  * Exchange Firebase ID token for CarsX tokens (access + refresh) and user record.
