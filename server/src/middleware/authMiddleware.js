@@ -34,7 +34,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
-export const protectRoute = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || req.headers.Authorization;
     if (!authHeader?.startsWith("Bearer ")) return res.status(401).json({ message: "No token, authorization denied" });
