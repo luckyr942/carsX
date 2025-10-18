@@ -36,5 +36,9 @@ app.get("/", (req, res) => {
   res.send("CarsX backend is running 🚗💨");
 });
 
+//render deploy
+app.get("/healthz", (req, res) => res.send("OK"));
+
+
 // ✅ Start server
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
